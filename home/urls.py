@@ -23,4 +23,5 @@ urlpatterns = [
     path("home/", views.Home.as_view(), name="home"),
     path("hometemplateview/", views.HomeView.as_view(), name="hometemplateview"),
     path("two/", views.Two.as_view(), name="two"),
+    path("homelistview/", views.HomeListView.as_view(), name="homelistview"),
 ]
