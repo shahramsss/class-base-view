@@ -19,5 +19,8 @@ from django.urls import path
 from home import views
 
 app_name = "home"
-urlpatterns = [path("home/", views.Home.as_view(), name="home")]
-urlpatterns = [path("hometemplateview/",views.HomeView.as_view(), name="hometemplateview")]
+urlpatterns = [
+    path("home/", views.Home.as_view(), name="home"),
+    path("hometemplateview/", views.HomeView.as_view(), name="hometemplateview"),
+    path("two/", views.Two.as_view(), name="two"),
+]

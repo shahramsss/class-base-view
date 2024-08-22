@@ -3,7 +3,7 @@ from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView , RedirectView
 from .models import Car
 
 
@@ -41,3 +41,16 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["cars"] = Car.objects.all()
         return context
+
+
+class Two(RedirectView):
+    # url = 'google.com' """ http://127.0.0.1:8000/two/google.com """ 
+    # url = 'http://google.com'  
+    pattern_name = 'home:home'
+
+    query_string = True # defaulte False : http://127.0.0.1:8000/home/?name=home
+
+    def get_redirect_url(self, *args: Any, **kwargs: Any) :
+        print('*'*90)
+        print('proccessing your request...')
+        return super().get_redirect_url(*args, **kwargs)
