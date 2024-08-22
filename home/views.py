@@ -5,8 +5,17 @@ from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, ListView, DetailView
+from django.views.generic import (
+    TemplateView,
+    RedirectView,
+    ListView,
+    DetailView,
+    FormView,
+)
 from .models import Car
+from .forms import CarCreateForm
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 class Home(View):
@@ -94,4 +103,20 @@ class Detail(DetailView):
             name=self.kwargs["name"],
             owner=self.kwargs["owner"],
             year=self.kwargs["year"],
+        )
+
+
+class Create(FormView):
+    template_name = "home/create.html"
+    form_class = CarCreateForm
+    success_url = reverse_lazy("home:homelistview")
+
+    def form_valid(self, form):
+        self._create_car(form.cleaned_data)
+        messages.success(self.request, " created car successfully", "success")
+        return super().form_valid(form)
+
+    def _create_car(self, data):
+        return Car.objects.create(
+            name=data["name"], owner=data["owner"], year=data["year"]
         )

@@ -27,4 +27,6 @@ urlpatterns = [
     # path("detail/<int:pk>/", views.Detail.as_view(), name="detail"),
     # path("detail/<slug:my_slug>/", views.Detail.as_view(), name="detail"),
     path("detail/<slug:name>/<slug:owner>/<slug:year>/", views.Detail.as_view(), name="detail"),
+    path("detail/<slug:name>/<slug:owner>/<slug:year>/", views.Detail.as_view(), name="detail"),
+    path("create/", views.Create.as_view(), name="create"),
 ]
