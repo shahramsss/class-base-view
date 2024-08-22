@@ -16,6 +16,31 @@
 <body>
     <div class="bg-light">
         <div class="container p-3">
+            {% if messages %}
+            {% for msg in messages %}
+            <p class="alert alert-{{ msg.tags }}">
+                <span class="closebtn">&times;</span>
+                {{ msg }}
+            </p>
+
+            <script>
+                var close = document.getElementsByClassName("closebtn");
+                var i;
+
+                for (i = 0; i < close.length; i++) {
+                    close[i].onclick = function () {
+                        var div = this.parentElement;
+                        div.style.opacity = "0";
+                        div.style.display = "none";
+                    }
+                }
+            </script>
+
+            <!-- <p class="alert alert-{{ msg.tags }}">
+            {{ msg }}
+        </p> -->
+            {% endfor %}
+            {% endif %}
 
             {% block content%}
 

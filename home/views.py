@@ -12,7 +12,8 @@ from django.views.generic import (
     ListView,
     DetailView,
     FormView,
-    CreateView
+    CreateView , 
+    DeleteView,
 )
 from .models import Car
 from .forms import CarCreateForm
@@ -136,3 +137,10 @@ class CarCreateView(CreateView):
         car.save()
         messages.success(self.request, " created car successfully", "success")
         return super().form_valid(form)
+
+
+
+class CarDeleteView(DeleteView):
+    model = Car # object
+    success_url = reverse_lazy("home:homelistview")
+    template_name = "home/delete.html"

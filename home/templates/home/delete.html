@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+
+<form action="" method="post" novalidate>
+    {%csrf_token%}
+    <p>are you really want to delete "{{object}}" ?</p>
+    <input type="submit" value="delete">
+</form>
+
+{% endblock content%}
