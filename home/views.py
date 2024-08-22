@@ -1,6 +1,7 @@
 from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
+from django.forms import BaseModelForm
 from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.views.generic import (
     ListView,
     DetailView,
     FormView,
+    CreateView
 )
 from .models import Car
 from .forms import CarCreateForm
@@ -120,3 +122,17 @@ class Create(FormView):
         return Car.objects.create(
             name=data["name"], owner=data["owner"], year=data["year"]
         )
+
+
+class CarCreateView(CreateView):
+    model = Car 
+    fields = ['name' , 'year']
+    success_url = reverse_lazy("home:homelistview")
+    template_name = "home/create.html"
+
+    def form_valid(self, form):
+        car = form.save(commit=False)
+        car.owner = self.request.user.username if self.request.user.username else 'nothing'
+        car.save()
+        messages.success(self.request, " created car successfully", "success")
+        return super().form_valid(form)
