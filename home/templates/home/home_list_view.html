@@ -6,7 +6,8 @@
 <hr>
 {% for car in cars %}
 
-<p>{{car.name}}</p>
+{% comment %} <p><a href="{% url 'home:detail' car.id %} ">{{car.name}}</a></p> {% endcomment %}
+<p><a href="{% url 'home:detail' car.name car.owner car.year %} ">{{car.name}}</a></p>
 
 {%endfor%}
 

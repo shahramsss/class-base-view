@@ -24,4 +24,7 @@ urlpatterns = [
     path("hometemplateview/", views.HomeView.as_view(), name="hometemplateview"),
     path("two/", views.Two.as_view(), name="two"),
     path("homelistview/", views.HomeListView.as_view(), name="homelistview"),
+    # path("detail/<int:pk>/", views.Detail.as_view(), name="detail"),
+    # path("detail/<slug:my_slug>/", views.Detail.as_view(), name="detail"),
+    path("detail/<slug:name>/<slug:owner>/<slug:year>/", views.Detail.as_view(), name="detail"),
 ]

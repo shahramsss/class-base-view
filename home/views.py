@@ -1,10 +1,11 @@
 from typing import Any
+from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import TemplateView, RedirectView, ListView
+from django.views.generic import TemplateView, RedirectView, ListView, DetailView
 from .models import Car
 
 
@@ -65,9 +66,32 @@ class HomeListView(ListView):
     allow_empty = False  # default True: dont error
 
     def get_queryset(self) -> QuerySet[Any]:
-        return Car.objects.filter(year__gte=2016)
+        return Car.objects.filter(year__gte=2000)
 
     def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context['name'] = "jack"
+        context["name"] = "jack"
         return context
+
+
+class Detail(DetailView):
+    template_name = "home/detail.html"
+    # model = Car # object
+    # # context_object_name = "car"
+    # slug_field = 'name'
+    # slug_url_kwarg = "my_slug"
+    # # pk_url_kwarg = 'id' # default: pk
+    # # queryset = Car.objects.filter(year__gte = 2016)
+
+    # def get_queryset(self):
+    #     if self.request.user.is_authenticated:
+    #         return Car.objects.filter(name = self.kwargs['my_slug'])
+    #     else:
+    #         return Car.objects.none()
+
+    def get_object(self, queryset=None):
+        return Car.objects.get(
+            name=self.kwargs["name"],
+            owner=self.kwargs["owner"],
+            year=self.kwargs["year"],
+        )
