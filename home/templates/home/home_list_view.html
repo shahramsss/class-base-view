@@ -8,7 +8,8 @@
 
 {% comment %} <p><a href="{% url 'home:detail' car.id %} ">{{car.name}}</a></p> {% endcomment %}
 <p><a href="{% url 'home:detail' car.name car.owner car.year %} ">{{car.name}}</a>
-    <a style="color: red;" href="{% url 'home:delete' car.id %} "> delete</a></p>
+    <a style="color: red;" href="{% url 'home:delete' car.id %} "> delete</a>
+    <a style="color: blue;" href="{% url 'home:update' car.id %} "> update</a></p>
 
 {%endfor%}
 

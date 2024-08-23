@@ -31,4 +31,5 @@ urlpatterns = [
     path("create/", views.Create.as_view(), name="create"),
     path("carcreateview/", views.CarCreateView.as_view(), name="carcreateview"),
     path("delele/<int:pk>/", views.CarDeleteView.as_view(), name="delete"),
+    path("update/<int:pk>/", views.CarUpdateView.as_view(), name="update"),
 ]
