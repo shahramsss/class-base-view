@@ -14,6 +14,7 @@ from django.views.generic import (
     FormView,
     CreateView , 
     DeleteView,
+    UpdateView,
 )
 from .models import Car
 from .forms import CarCreateForm
@@ -144,3 +145,11 @@ class CarDeleteView(DeleteView):
     model = Car # object
     success_url = reverse_lazy("home:homelistview")
     template_name = "home/delete.html"
+
+
+
+class CarUpdateView(UpdateView):
+    model = Car
+    template_name = "home/update.html"
+    fields = ["name" , "year"]
+    success_url = reverse_lazy("home:homelistview")
