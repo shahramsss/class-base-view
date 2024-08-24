@@ -20,6 +20,7 @@ from .models import Car
 from .forms import CarCreateForm
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth import views as auth_view
 
 
 class Home(View):
@@ -153,3 +154,14 @@ class CarUpdateView(UpdateView):
     template_name = "home/update.html"
     fields = ["name" , "year"]
     success_url = reverse_lazy("home:homelistview")
+
+
+class LoginView(auth_view.LoginView):
+    template_name = 'home/login.html'
+    next_page =  reverse_lazy("home:homelistview")
+
+    
+class LogoutView(auth_view.LogoutView):
+    next_page =  reverse_lazy("home:homelistview")
+    
+    
