@@ -159,5 +159,9 @@ class CarUpdateView(UpdateView):
 class LoginView(auth_view.LoginView):
     template_name = 'home/login.html'
     next_page =  reverse_lazy("home:homelistview")
+
+    
+class LogoutView(auth_view.LogoutView):
+    next_page =  reverse_lazy("home:homelistview")
     
     

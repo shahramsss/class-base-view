@@ -2,6 +2,12 @@
 
 
 {% block content%}
+{% if user.is_authenticated %}
+<form action="{% url 'home:logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-info">Logout</button>
+</form>
+{% else %}
 
 <form action="" method="post" novalidate>
     {%csrf_token%}
@@ -9,4 +15,5 @@
     <input type="submit" value="login">
 </form>
 
+{% endif %}
 {% endblock content%}

@@ -33,4 +33,5 @@ urlpatterns = [
     path("delele/<int:pk>/", views.CarDeleteView.as_view(), name="delete"),
     path("update/<int:pk>/", views.CarUpdateView.as_view(), name="update"),
     path("login/", views.LoginView.as_view(), name="login"),
+    path("logout/", views.LogoutView.as_view(), name="logout"),
 ]
