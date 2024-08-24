@@ -15,6 +15,7 @@ from django.views.generic import (
     CreateView , 
     DeleteView,
     UpdateView,
+    MonthArchiveView,
 )
 from .models import Car
 from .forms import CarCreateForm
@@ -164,4 +165,10 @@ class LoginView(auth_view.LoginView):
 class LogoutView(auth_view.LogoutView):
     next_page =  reverse_lazy("home:homelistview")
     
+
+class MonthCarView(MonthArchiveView):
+    model = Car
+    template_name  = 'home/home_list_view.html'
+    date_field = "created"
+    context_object_name = "cars"
     
