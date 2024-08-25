@@ -179,3 +179,10 @@ class MonthCarView(MonthArchiveView):
 class CarSerializer(ListAPIView):
     serializer_class  = CarSerializer
     queryset = Car.objects.all()
+
+
+class SingleCarSerializer(RetrieveAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
+    lookup_field = "name"
+

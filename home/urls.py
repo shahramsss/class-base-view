@@ -34,6 +34,7 @@ urlpatterns = [
     path("update/<int:pk>/", views.CarUpdateView.as_view(), name="update"),
     path("login/", views.LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),
-    path("date/<int:year>/<int:month>/", views.MonthCarView.as_view(month_format="%m"), name="yearcar"),
+    path("date/<int:year>/<int:month>/", views.MonthCarView.as_view(month_format="%m"), name="monthcar"),
     path("carserializer/", views.CarSerializer.as_view(), name="carserializer"),
+    path("<str:name>/", views.SingleCarSerializer.as_view(), name="singlecarserializer"),
 ]
