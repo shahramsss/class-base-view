@@ -22,6 +22,8 @@ from .forms import CarCreateForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth import views as auth_view
+from rest_framework.generics import ListAPIView , RetrieveAPIView
+from .serializers import CarSerializer
 
 
 class Home(View):
@@ -172,3 +174,8 @@ class MonthCarView(MonthArchiveView):
     date_field = "created"
     context_object_name = "cars"
     
+
+
+class CarSerializer(ListAPIView):
+    serializer_class  = CarSerializer
+    queryset = Car.objects.all()

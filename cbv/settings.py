@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # local apps 
     'home',
     # third apps
+    'rest_framework',
+
 
 ]
 
