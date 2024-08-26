@@ -22,7 +22,7 @@ from .forms import CarCreateForm
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.auth import views as auth_view
-from rest_framework.generics import ListAPIView , RetrieveAPIView
+from rest_framework.generics import ListAPIView , RetrieveAPIView , DestroyAPIView , UpdateAPIView , CreateAPIView , ListCreateAPIView
 from .serializers import CarSerializer
 
 
@@ -186,3 +186,24 @@ class SingleCarSerializer(RetrieveAPIView):
     queryset = Car.objects.all()
     lookup_field = "name"
 
+
+class DeleteCar(DestroyAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
+    lookup_field  = "name"
+    lookup_url_kwarg  = "car_name"
+
+
+class CreateCar(CreateAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
+    
+
+class UpdateCar(UpdateAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
+
+
+class ListCreateCar(ListCreateAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()

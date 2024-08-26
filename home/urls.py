@@ -37,4 +37,8 @@ urlpatterns = [
     path("date/<int:year>/<int:month>/", views.MonthCarView.as_view(month_format="%m"), name="monthcar"),
     path("carserializer/", views.CarSerializer.as_view(), name="carserializer"),
     path("<str:name>/", views.SingleCarSerializer.as_view(), name="singlecarserializer"),
+    path("delete/<str:name>/", views.DeleteCar.as_view(), name="delete"),
+    path("create/", views.CreateCar.as_view(), name="create"),
+    path("update/<int:pk>/", views.UpdateCar.as_view(), name="update"),
+    path("listcreate/", views.ListCreateCar.as_view(), name="listcreate"),
 ]
