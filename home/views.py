@@ -16,6 +16,7 @@ from django.views.generic import (
     DeleteView,
     UpdateView,
     MonthArchiveView,
+    
 )
 from .models import Car
 from .forms import CarCreateForm
@@ -24,7 +25,9 @@ from django.contrib import messages
 from django.contrib.auth import views as auth_view
 from rest_framework.generics import ListAPIView , RetrieveAPIView , DestroyAPIView , UpdateAPIView , CreateAPIView , ListCreateAPIView
 from .serializers import CarSerializer
-
+from rest_framework.generics import GenericAPIView, RetrieveDestroyAPIView
+from rest_framework.response import Response
+from rest_framework.mixins import RetrieveModelMixin
 
 class Home(View):
     # http_method_names = ["post"]
@@ -207,3 +210,11 @@ class UpdateCar(UpdateAPIView):
 class ListCreateCar(ListCreateAPIView):
     serializer_class = CarSerializer
     queryset = Car.objects.all()
+
+
+class CarGenericApi(RetrieveModelMixin, GenericAPIView):
+    serializer_class = CarSerializer
+    queryset = Car.objects.all()
+
+    def get(self , request , *args , **kwargs):
+        return self.retrieve( request , *args , **kwargs)
